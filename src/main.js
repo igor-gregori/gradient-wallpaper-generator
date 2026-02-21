@@ -1,39 +1,85 @@
 import "./style.css";
 import { waterDrip } from "./sound";
 
-let stops = ["#1a1a1a", "#090047"];
+let stops = [];
 
 const app = document.querySelector("#background-div");
 
 const generateRandomBtn = document.getElementById("generate-random-btn");
-generateRandomBtn.addEventListener("click", generateRandomBackground);
+generateRandomBtn.addEventListener("click", randomizeStops);
 
-const addSpotBtn = document.getElementById("add-stop-btn");
-addSpotBtn.addEventListener("click", addSpot);
+const addStopBtn = document.getElementById("add-stop-btn");
+addStopBtn.addEventListener("click", addStop);
 
 const stopsDiv = document.getElementById("stops-div-cell");
 
-for (const stop of stops) {
-  stopsDiv.innerHTML += `<div>${stop}</div>`;
+for (let i = 0; i < 2; i++) {
+  const newStop = generateRandomStop();
+  stops.push(newStop);
+}
+renderAllStops();
+applyToBackground();
+
+function applyToBackground() {
+  app.style.backgroundImage = `linear-gradient(to right, ${stops.join(",")})`;
 }
 
-function generateRandomBackground() {
-  const newStops = [];
-  for (let i = 0; i < stops.length; i++) {
-    const newStop = "#" + ((Math.random() * 0xffffff) << 0).toString(16).padStart(6, "0");
-    newStops.push(newStop);
+function generateRandomStop() {
+  return "#" + ((Math.random() * 0xffffff) << 0).toString(16).padStart(6, "0");
+}
+
+function renderAllStops() {
+  stopsDiv.innerHTML = "";
+
+  for (let stop of stops) {
+    const removeStopBtn = document.createElement("button");
+    removeStopBtn.innerText = "X";
+    removeStopBtn.addEventListener("click", () => {
+      removeStop(stop);
+    });
+
+    const stopsSubDiv = document.createElement("div");
+    stopsSubDiv.innerText = stop;
+
+    stopsSubDiv.appendChild(removeStopBtn);
+    stopsDiv.appendChild(stopsSubDiv);
   }
-  stops = newStops;
-  app.style.backgroundImage = `linear-gradient(to right, ${stops.join(",")})`;
+}
+
+function addStop() {
+  const newStop = generateRandomStop();
+  stops.push(newStop);
+
+  renderAllStops();
+  applyToBackground();
 
   waterDrip();
-
-  stopsDiv.innerHTML = "";
-  for (const stop of stops) {
-    stopsDiv.innerHTML += `<div>${stop}</div>`;
-  }
 }
 
-function addSpot() {
-  stopsDiv.innerHTML += "<div>#XXXXXX</div>";
+function randomizeStops() {
+  const newStops = [];
+  for (let i = 0; i < stops.length; i++) {
+    newStops.push(generateRandomStop());
+  }
+  stops = newStops;
+
+  renderAllStops();
+  applyToBackground();
+
+  waterDrip();
+}
+
+function removeStop(stop) {
+  if (stops.length === 1) {
+    alert("You need at least one stop!");
+    return;
+  }
+
+  const newStops = stops.filter((i) => i != stop);
+  stops = newStops;
+
+  renderAllStops();
+  applyToBackground();
+
+  waterDrip();
 }
