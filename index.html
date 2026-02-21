@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>gradient-wallpaper-generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="background-div" class="background-div">
+      <div class="control-panel">
+        <div class="generate-random-div">
+          <div class="generate-random-sub-div">
+            <button id="generate-random-btn" class="generate-random-btn">Generate random</button>
+          </div>
+        </div>
+        <div class="gradient-options-div">
+          <div class="gradient-options-btns-div">
+            <button>Linear</button>
+            <button>Radial</button>
+          </div>
+          <div>
+            <p>Linear degree control</p>
+          </div>
+        </div>
+        <div id="stops-div" class="stops-div">
+          <div id="stops-div-cell" class="stops-div-cell"></div>
+          <div id="stops-div-add" class="stops-div-add">
+            <div class="stops-div-sub-add">
+              <button id="add-stop-btn" class="add-stop-btn">+ Add random stop</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
