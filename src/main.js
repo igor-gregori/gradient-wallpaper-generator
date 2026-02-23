@@ -32,6 +32,14 @@ function renderAllStops() {
   stopsDiv.innerHTML = "";
 
   for (let stop of stops) {
+    const stopColorPicker = document.createElement("input");
+    stopColorPicker.type = "color";
+    stopColorPicker.value = stop;
+
+    const stopSpan = document.createElement("span");
+    stopSpan.className = "monospaced";
+    stopSpan.innerText = stop.toUpperCase();
+
     const removeStopBtn = document.createElement("button");
     removeStopBtn.innerText = "X";
     removeStopBtn.addEventListener("click", () => {
@@ -39,9 +47,12 @@ function renderAllStops() {
     });
 
     const stopsSubDiv = document.createElement("div");
-    stopsSubDiv.innerText = stop;
+    stopsSubDiv.className = "stops-sub-div";
 
+    stopsSubDiv.appendChild(stopColorPicker);
+    stopsSubDiv.appendChild(stopSpan);
     stopsSubDiv.appendChild(removeStopBtn);
+
     stopsDiv.appendChild(stopsSubDiv);
   }
 }

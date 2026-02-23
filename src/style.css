@@ -3,7 +3,7 @@ body {
   margin: 0;
   height: 100%;
 
-  font-family: Roboto, sans-serif;
+  font-family: Roboto, monospace, sans-serif;
   font-weight: 400;
 
   font-synthesis: none;
@@ -30,6 +30,33 @@ button:hover {
 button:active {
   background-color: rgb(217, 217, 217);
   color: rgb(34, 34, 34);
+}
+
+input[type="color"] {
+  border: none;
+  width: 50px;
+  height: 20px;
+  padding: 0;
+  cursor: pointer;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+}
+
+input[type="color"]::-moz-color-swatch {
+  border: none;
+  padding: 0;
+}
+
+.monospaced {
+  font-family: "Roboto Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .background-div {
@@ -116,4 +143,13 @@ button:active {
 
 .add-stop-btn {
   padding: 5px 30px 5px 30px;
+}
+
+.stops-sub-div {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  gap: 10px;
 }
