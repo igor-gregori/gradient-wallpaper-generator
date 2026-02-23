@@ -1,5 +1,5 @@
 import "./style.css";
-import { waterDrip } from "./sound";
+import { playWaterDrip } from "./sound";
 
 let stops = [];
 
@@ -18,9 +18,9 @@ for (let i = 0; i < 2; i++) {
   stops.push(newStop);
 }
 renderAllStops();
-applyToBackground();
+renderBackground();
 
-function applyToBackground() {
+function renderBackground() {
   app.style.backgroundImage = `linear-gradient(to right, ${stops.join(",")})`;
 }
 
@@ -31,20 +31,22 @@ function generateRandomStop() {
 function renderAllStops() {
   stopsDiv.innerHTML = "";
 
-  for (let stop of stops) {
+  for (let i = 0; i < stops.length; i++) {
+    const stop = stops[i];
+
     const stopColorPicker = document.createElement("input");
     stopColorPicker.type = "color";
     stopColorPicker.value = stop;
+    stopColorPicker.addEventListener("input", (e) => changeStopColor(i, e.target.value));
 
     const stopSpan = document.createElement("span");
+    stopSpan.id = `s${i}`;
     stopSpan.className = "monospaced";
     stopSpan.innerText = stop.toUpperCase();
 
     const removeStopBtn = document.createElement("button");
     removeStopBtn.innerText = "X";
-    removeStopBtn.addEventListener("click", () => {
-      removeStop(stop);
-    });
+    removeStopBtn.addEventListener("click", () => removeStop(stop));
 
     const stopsSubDiv = document.createElement("div");
     stopsSubDiv.className = "stops-sub-div";
@@ -62,9 +64,9 @@ function addStop() {
   stops.push(newStop);
 
   renderAllStops();
-  applyToBackground();
+  renderBackground();
 
-  waterDrip();
+  playWaterDrip();
 }
 
 function randomizeStops() {
@@ -75,9 +77,9 @@ function randomizeStops() {
   stops = newStops;
 
   renderAllStops();
-  applyToBackground();
+  renderBackground();
 
-  waterDrip();
+  playWaterDrip();
 }
 
 function removeStop(stop) {
@@ -90,7 +92,17 @@ function removeStop(stop) {
   stops = newStops;
 
   renderAllStops();
-  applyToBackground();
+  renderBackground();
 
-  waterDrip();
+  playWaterDrip();
+}
+
+function changeStopColor(oldStopsIdx, newStop) {
+  stops[oldStopsIdx] = newStop;
+
+  const stopSpan = document.getElementById(`s${oldStopsIdx}`);
+  stopSpan.id = `s${oldStopsIdx}`;
+  stopSpan.innerText = newStop.toUpperCase();
+
+  renderBackground();
 }
