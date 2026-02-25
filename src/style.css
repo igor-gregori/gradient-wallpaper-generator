@@ -53,10 +53,67 @@ input[type="color"]::-moz-color-swatch {
   padding: 0;
 }
 
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  border: none;
+  width: 150px;
+  height: 30px;
+  padding: 0;
+  cursor: n-resize;
+
+  background-color: rgb(78, 78, 78);
+  border-radius: 5px;
+  color: white;
+  font-family: "Roboto";
+  font-weight: 500;
+  font-size: medium;
+  padding: 5px;
+}
+
+input[type="number"]:disabled {
+  display: none;
+}
+
+.options-radio-label input[type="radio"] {
+  display: none;
+  justify-content: center;
+}
+
+.options-radio-ui {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  margin-right: 10px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.options-radio-label input[type="radio"]:checked + .options-radio-ui {
+  border-color: #2196f3;
+}
+
+.options-radio-label input[type="radio"]:checked + .options-radio-ui::after {
+  content: "";
+  display: block;
+  width: 10px;
+  height: 10px;
+  background: #2196f3;
+  border-radius: 50%;
+  margin: 3px;
+}
+
 .monospaced {
   font-family: "Roboto Mono", monospace;
   font-weight: 400;
   font-style: normal;
+  cursor: pointer;
 }
 
 .background-div {
@@ -75,8 +132,9 @@ input[type="color"]::-moz-color-swatch {
   flex-direction: row;
   justify-content: space-evenly;
 
-  width: 100vh;
+  width: 80vh;
   height: 20vh;
+  margin-bottom: 5px;
   border-radius: 10px;
   background-color: rgb(29, 31, 32);
   color: white;
@@ -102,12 +160,21 @@ input[type="color"]::-moz-color-swatch {
 
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
 }
 
-.gradient-options-btns-div {
+.gradient-options-radio-div {
+  margin-top: 10px;
+
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+}
+
+.gradient-options-value-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .generate-random-btn {
@@ -142,7 +209,7 @@ input[type="color"]::-moz-color-swatch {
 }
 
 .add-stop-btn {
-  padding: 5px 30px 5px 30px;
+  padding: 15px 30px 15px 30px;
 }
 
 .stops-sub-div {
