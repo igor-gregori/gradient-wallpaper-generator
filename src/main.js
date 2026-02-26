@@ -2,6 +2,8 @@ import "./style.css";
 import { playWaterDrip } from "./sound";
 
 let stops = [];
+let option = "linear";
+let linearDegree = 90;
 
 const app = document.querySelector("#background-div");
 
@@ -10,6 +12,16 @@ generateRandomBtn.addEventListener("click", randomizeStops);
 
 const addStopBtn = document.getElementById("add-stop-btn");
 addStopBtn.addEventListener("click", addStop);
+
+const linearRadioInput = document.getElementById("linear-radio-input");
+linearRadioInput.addEventListener("click", changeRadioOption);
+
+const radialRadioInput = document.getElementById("radial-radio-input");
+radialRadioInput.addEventListener("click", changeRadioOption);
+
+const linearValueInput = document.getElementById("linear-value-input");
+linearValueInput.addEventListener("wheel", changeLinearValueWheel);
+linearValueInput.addEventListener("input", changeLinearValue);
 
 const stopsDiv = document.getElementById("stops-div-cell");
 
@@ -21,7 +33,11 @@ renderAllStops();
 renderBackground();
 
 function renderBackground() {
-  app.style.backgroundImage = `linear-gradient(to right, ${stops.join(",")})`;
+  if (option === "linear") {
+    app.style.backgroundImage = `linear-gradient(${linearDegree}deg, ${stops.join(",")})`;
+  } else {
+    app.style.backgroundImage = `radial-gradient(circle, ${stops.join(",")})`;
+  }
 }
 
 function generateRandomStop() {
@@ -105,4 +121,41 @@ function changeStopColor(oldStopsIdx, newStop) {
   stopSpan.innerText = newStop.toUpperCase();
 
   renderBackground();
+}
+
+function changeRadioOption(event) {
+  const actualOption = event.target.value;
+
+  if (actualOption === "linear") {
+    option = "linear";
+    linearValueInput.style.color = "#FFFFFF";
+    linearValueInput.style.backgroundColor = "#4E4E4E";
+    linearValueInput.style.cursor = "n-resize";
+    linearValueInput.disabled = false;
+  } else {
+    option = "radial";
+    linearValueInput.style.color = "#888888";
+    linearValueInput.style.backgroundColor = "#2E2E2E";
+    linearValueInput.style.cursor = "not-allowed";
+    linearValueInput.disabled = true;
+  }
+
+  renderBackground();
+}
+
+function changeLinearValueWheel(event) {
+  if (event.deltaY < 0 && linearValueInput.valueAsNumber < 365) {
+    linearValueInput.valueAsNumber += 5;
+  } else if (event.deltaY > 0 && linearValueInput.valueAsNumber > 0) {
+    linearValueInput.valueAsNumber -= 5;
+  }
+  linearDegree = linearValueInput.valueAsNumber;
+  renderBackground();
+}
+
+function changeLinearValue(event) {
+  if (linearValueInput.valueAsNumber > 0 && linearValueInput.valueAsNumber < 365) {
+    linearDegree = linearValueInput.valueAsNumber;
+    renderBackground();
+  }
 }
