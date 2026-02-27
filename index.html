@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>gradient-wallpaper-generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" crossorigin src="/gradient-wallpaper-generator/assets/index-CVy3aJGh.js"></script>
+    <link rel="stylesheet" crossorigin href="/gradient-wallpaper-generator/assets/index-BHyU3Pg4.css">
+  </head>
+  <body>
+    <div id="background-div" class="background-div">
+      <div id="control-panel" class="control-panel">
+        <div class="control-panel-first-div">
+          <div class="control-panel-first-sub-div">
+            <button id="generate-random-btn" class="large-btn">🎲 Randomize</button>
+          </div>
+          <div class="control-panel-first-sub-div">
+            <button id="download-btn" class="large-btn">⬇️ Download&nbsp;&nbsp;</button>
+          </div>
+        </div>
+        <div class="control-panel-second-div">
+          <div class="gradient-options-radio-div">
+            <label class="options-radio-label">
+              <input id="linear-radio-input" type="radio" name="radio-options" value="linear" checked />
+              <span class="options-radio-ui"></span>
+              Linear
+            </label>
+            <label class="options-radio-label">
+              <input id="radial-radio-input" type="radio" name="radio-options" value="radial" />
+              <span class="options-radio-ui"></span>
+              Radial
+            </label>
+          </div>
+          <div class="gradient-options-value-div">
+            <input id="linear-value-input" type="number" pattern="[0-9]*" value="145" />
+          </div>
+        </div>
+        <div id="control-panel-second-div" class="stops-div">
+          <div id="stops-div-cell" class="stops-div-cell"></div>
+          <div id="stops-div-add" class="stops-div-add">
+            <div class="stops-div-sub-add">
+              <button id="add-stop-btn" class="add-stop-btn">➕ Add random stop</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
