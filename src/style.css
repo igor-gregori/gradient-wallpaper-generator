@@ -142,21 +142,22 @@ input[type="number"]:disabled {
   border: 1px solid #404547;
 }
 
-.generate-random-div {
+.control-panel-first-div {
   width: 100%;
+  height: 100%;
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 
-.generate-random-sub-div {
+.control-panel-first-sub-div {
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
 
-.gradient-options-div {
+.control-panel-second-div {
   width: 100%;
 
   display: flex;
@@ -178,7 +179,7 @@ input[type="number"]:disabled {
   justify-content: center;
 }
 
-.generate-random-btn {
+.large-btn {
   padding: 15px;
 }
 
@@ -210,7 +211,7 @@ input[type="number"]:disabled {
 }
 
 .add-stop-btn {
-  padding: 15px 30px 15px 30px;
+  padding: 15px 20px 15px 20px;
 }
 
 .stops-sub-div {

@@ -1,14 +1,19 @@
 import "./style.css";
 import { playWaterDrip } from "./sound";
+import html2canvas from "html2canvas";
 
 let stops = [];
 let option = "linear";
 let linearDegree = 90;
 
-const app = document.querySelector("#background-div");
+const backgroundDiv = document.getElementById("background-div");
+const controlPanel = document.getElementById("control-panel");
 
 const generateRandomBtn = document.getElementById("generate-random-btn");
 generateRandomBtn.addEventListener("click", randomizeStops);
+
+const downloadBtn = document.getElementById("download-btn");
+downloadBtn.addEventListener("click", download);
 
 const addStopBtn = document.getElementById("add-stop-btn");
 addStopBtn.addEventListener("click", addStop);
@@ -34,9 +39,9 @@ renderBackground();
 
 function renderBackground() {
   if (option === "linear") {
-    app.style.backgroundImage = `linear-gradient(${linearDegree}deg, ${stops.join(",")})`;
+    backgroundDiv.style.backgroundImage = `linear-gradient(${linearDegree}deg, ${stops.join(",")})`;
   } else {
-    app.style.backgroundImage = `radial-gradient(circle, ${stops.join(",")})`;
+    backgroundDiv.style.backgroundImage = `radial-gradient(circle, ${stops.join(",")})`;
   }
 }
 
@@ -144,6 +149,7 @@ function changeRadioOption(event) {
 }
 
 function changeLinearValueWheel(event) {
+  if (option === "radial") return;
   if (event.deltaY < 0 && linearValueInput.valueAsNumber < 365) {
     linearValueInput.valueAsNumber += 5;
   } else if (event.deltaY > 0 && linearValueInput.valueAsNumber > 0) {
@@ -158,4 +164,26 @@ function changeLinearValue(event) {
     linearDegree = linearValueInput.valueAsNumber;
     renderBackground();
   }
+}
+
+function download() {
+  hideBeforeDownload();
+  html2canvas(document.getElementById("background-div")).then(function (canvas) {
+    const link = document.createElement("a");
+    link.download = "gradient-wallpaper.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+  });
+  showAfterDownload();
+  playWaterDrip();
+}
+
+function hideBeforeDownload() {
+  controlPanel.style.display = "none";
+  backgroundDiv.style.borderRadius = "0px";
+}
+
+function showAfterDownload() {
+  controlPanel.style.display = "flex";
+  backgroundDiv.style.borderRadius = "10px";
 }
